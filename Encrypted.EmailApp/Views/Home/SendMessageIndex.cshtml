@@ -1,0 +1,32 @@
+﻿@model Encrypted.EmailApp.Models.EmailMessageViewModel
+
+@{
+    ViewBag.Title = "Send encrypted message";
+}
+
+@{
+
+    using (Html.BeginForm("SendMessage", "Home", FormMethod.Post))
+    {
+        <label>To UserName</label>
+        @Html.TextBoxFor(m => m.ToUserName)
+        @Html.ValidationMessageFor(m => m.ToUserName)
+        <br />
+
+        <label>Subject</label>
+        @Html.TextBoxFor(m => m.Subject)
+        @Html.ValidationMessageFor(m => m.Subject)
+
+        <br />
+        <label>Message</label>
+        @Html.TextAreaFor(m => m.Message)
+        @Html.ValidationMessageFor(m => m.Message)
+
+        <br />
+        <label>Encryption key</label>
+        @Html.TextBoxFor(m => m.EncryptionKey)
+        @Html.ValidationMessageFor(m => m.EncryptionKey)
+
+        <input type="submit" value="Send" />
+    }
+}

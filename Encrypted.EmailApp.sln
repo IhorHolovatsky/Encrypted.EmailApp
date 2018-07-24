@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encrypted.EmailApp", "Encrypted.EmailApp\Encrypted.EmailApp.csproj", "{95B187E6-96CC-401B-B2DF-A34215B5700F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailApp.Repositories", "EmailApp.Repositories\EmailApp.Repositories.csproj", "{D256799A-9E6E-40EA-8006-C1DFF12375AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailApp.Domain", "EmailApp.Domain\EmailApp.Domain.csproj", "{8C73D7F3-AFC4-4508-9BC9-EB79293C1B47}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95B187E6-96CC-401B-B2DF-A34215B5700F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95B187E6-96CC-401B-B2DF-A34215B5700F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95B187E6-96CC-401B-B2DF-A34215B5700F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95B187E6-96CC-401B-B2DF-A34215B5700F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D256799A-9E6E-40EA-8006-C1DFF12375AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D256799A-9E6E-40EA-8006-C1DFF12375AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D256799A-9E6E-40EA-8006-C1DFF12375AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D256799A-9E6E-40EA-8006-C1DFF12375AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C73D7F3-AFC4-4508-9BC9-EB79293C1B47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C73D7F3-AFC4-4508-9BC9-EB79293C1B47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C73D7F3-AFC4-4508-9BC9-EB79293C1B47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C73D7F3-AFC4-4508-9BC9-EB79293C1B47}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,30 @@
+﻿@using Encrypted.EmailApp.Utils
+@model Encrypted.EmailApp.Models.ViewMessagesIndexModel
+
+@{
+    ViewBag.Title = "View encrypted messages";
+}
+
+<h2>Encrypted Messages</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">From</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Message</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var emailMessage in Model.Messages)
+    {
+        <tr onclick="window.location = '@Url.Action("ViewMessage",new { messageId = emailMessage.MessageId})'">
+            <td>@emailMessage.FromUsername</td>
+            <td>@emailMessage.Subject</td>
+            <td>@emailMessage.Message.Truncate(100)</td>
+        </tr>
+    }
+    </tbody>
+</table>
+

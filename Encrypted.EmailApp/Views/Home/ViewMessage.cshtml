@@ -1,0 +1,30 @@
+﻿@model Encrypted.EmailApp.Models.ViewMessageIndexModel
+
+@{
+}
+
+@using (Html.BeginForm("ViewMessage", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Message.MessageId);
+
+    <label>From UserName</label>
+    @Html.DisplayTextFor(m => m.Message.FromUserName)
+    <br />
+
+    <label>Subject</label>
+    @Html.DisplayTextFor(m => m.Message.Subject)
+
+    <br />
+    <label>Message</label>
+    @Html.DisplayTextFor(m => m.Message.Message)
+
+    <br />
+    <label>Provide Encryption key</label>
+    @Html.TextBoxFor(m => m.Message.EncryptionKey)
+
+    <input type="submit" value="Send" />
+}
+
+
+
+
