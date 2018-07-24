@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using EmailApp.Domain;
-using EmailApp.Domain.Interfaces;
+using Encrypted.EmailApp.Domain;
 using Encrypted.EmailApp.Encryption;
+using Encrypted.EmailApp.Repositories.Interfaces;
 using Encrypted.EmailApp.Services.Interfaces;
 
 namespace Encrypted.EmailApp.Services

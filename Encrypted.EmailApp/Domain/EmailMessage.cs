@@ -1,4 +1,4 @@
-﻿namespace EmailApp.Domain
+﻿namespace Encrypted.EmailApp.Domain
 {
     public class EmailMessage
     {

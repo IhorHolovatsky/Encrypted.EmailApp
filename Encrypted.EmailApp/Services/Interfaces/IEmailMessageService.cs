@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using EmailApp.Domain;
+using Encrypted.EmailApp.Domain;
 
 namespace Encrypted.EmailApp.Services.Interfaces
 {

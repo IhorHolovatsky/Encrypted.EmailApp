@@ -6,8 +6,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
-using EmailApp.Domain.Interfaces;
-using EmailApp.Repositories;
+using Encrypted.EmailApp.Repositories;
+using Encrypted.EmailApp.Repositories.Interfaces;
 using Encrypted.EmailApp.Services;
 using Encrypted.EmailApp.Services.Interfaces;
 
@@ -43,6 +43,7 @@ namespace Encrypted.EmailApp
 
             builder.RegisterType<EmailMessageService>().As<IEmailMessageService>();
             builder.RegisterType<EmailMessageRepository>().As<IEmailMessageRepository>();
+            //builder.RegisterType<EmailMessageMemoryRepository>().As<IEmailMessageRepository>();
             #endregion
 
             var container = builder.Build();

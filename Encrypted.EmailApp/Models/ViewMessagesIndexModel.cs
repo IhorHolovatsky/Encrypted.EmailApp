@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using EmailApp.Domain;
+using Encrypted.EmailApp.Domain;
 using Encrypted.EmailApp.Services.Interfaces;
 
 namespace Encrypted.EmailApp.Models

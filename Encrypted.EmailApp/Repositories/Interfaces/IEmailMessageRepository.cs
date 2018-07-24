@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Encrypted.EmailApp.Domain;
 
-namespace EmailApp.Domain.Interfaces
+namespace Encrypted.EmailApp.Repositories.Interfaces
 {
     public interface IEmailMessageRepository
     {

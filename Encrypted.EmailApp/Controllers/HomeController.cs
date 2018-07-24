@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using EmailApp.Domain;
+using Encrypted.EmailApp.Domain;
 using Encrypted.EmailApp.Models;
 using Encrypted.EmailApp.Services.Interfaces;
 using Encrypted.EmailApp.Utils;

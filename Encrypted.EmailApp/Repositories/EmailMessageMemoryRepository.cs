@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EmailApp.Domain;
-using EmailApp.Domain.Interfaces;
+using Encrypted.EmailApp.Domain;
+using Encrypted.EmailApp.Repositories.Interfaces;
 
-namespace EmailApp.Repositories
+namespace Encrypted.EmailApp.Repositories
 {
-    public class EmailMessageRepository : IEmailMessageRepository
+    public class EmailMessageMemoryRepository : IEmailMessageRepository
     {
-        private static List<EmailMessage> _messages = new List<EmailMessage>();
+        private static readonly List<EmailMessage> _messages = new List<EmailMessage>();
 
-        static EmailMessageRepository()
+        static EmailMessageMemoryRepository()
         {
             _messages.Add(new EmailMessage
             {
@@ -23,7 +23,7 @@ namespace EmailApp.Repositories
                 UserId = 5
             });
         }
-        public EmailMessageRepository()
+        public EmailMessageMemoryRepository()
         {
             
         }
