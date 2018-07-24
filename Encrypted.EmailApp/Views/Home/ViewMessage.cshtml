@@ -3,7 +3,7 @@
 @{
 }
 
-@using (Html.BeginForm("ViewMessage", "Home", FormMethod.Post))
+@using (Html.BeginForm("DecryptMessage", "Home", FormMethod.Post))
 {
     @Html.HiddenFor(m => m.Message.MessageId);
 
@@ -21,6 +21,7 @@
     <br />
     <label>Provide Encryption key</label>
     @Html.TextBoxFor(m => m.Message.EncryptionKey)
+    @Html.ValidationMessageFor(m => m.Message.EncryptionKey)
 
     <input type="submit" value="Send" />
 }

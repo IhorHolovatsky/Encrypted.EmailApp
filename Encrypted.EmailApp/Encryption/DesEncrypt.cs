@@ -17,13 +17,27 @@ namespace Encrypted.EmailApp.Encryption
 
         public static string EncryptString(string plainText, string passPhrase)
         {
-            var initVectorBytes = Encoding.UTF8.GetBytes(INIT_VECTOR);
             var plainTextBytes = Encoding.UTF8.GetBytes(plainText);
-
             var keyBytes = new Rfc2898DeriveBytes(passPhrase, SALT)
                 .GetBytes(KEY_SIZE / 8);
 
-            var symmetricKey = new RijndaelManaged {Mode = CipherMode.CBC};
+            return EncryptString(plainTextBytes, keyBytes);
+        }
+
+        public static string EncryptString(byte[] plainTextBytes, string passPhrase)
+        {
+            var keyBytes = new Rfc2898DeriveBytes(passPhrase, SALT)
+                .GetBytes(KEY_SIZE / 8);
+
+            return EncryptString(plainTextBytes, keyBytes);
+        }
+
+
+        public static string EncryptString(byte[] plainTextBytes, byte[] keyBytes)
+        {
+            var initVectorBytes = Encoding.UTF8.GetBytes(INIT_VECTOR);
+
+            var symmetricKey = new RijndaelManaged { Mode = CipherMode.CBC };
             var encryptor = symmetricKey.CreateEncryptor(keyBytes, initVectorBytes);
 
             using (var memoryStream = new MemoryStream())
@@ -37,7 +51,8 @@ namespace Encrypted.EmailApp.Encryption
             }
         }
 
-        public static string DecryptString(string cipherText, string passPhrase)
+
+        public static byte[] DecryptStringReturnBytes(string cipherText, string passPhrase)
         {
             var cipherTextBytes = Convert.FromBase64String(cipherText);
 
@@ -46,17 +61,22 @@ namespace Encrypted.EmailApp.Encryption
             var keyBytes = new Rfc2898DeriveBytes(passPhrase, SALT)
                 .GetBytes(KEY_SIZE / 8);
 
-            var symmetricKey = new RijndaelManaged {Mode = CipherMode.CBC};
+            var symmetricKey = new RijndaelManaged { Mode = CipherMode.CBC };
             var decryptor = symmetricKey.CreateDecryptor(keyBytes, initVectorBytes);
 
             using (var memoryStream = new MemoryStream(cipherTextBytes))
             using (var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
             {
                 var plainTextBytes = new byte[cipherTextBytes.Length];
-                var decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
+                cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
 
-                return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount);
+                return plainTextBytes;
             }
+        }
+
+        public static string DecryptString(string cipherText, string passPhrase)
+        {
+            return Encoding.UTF8.GetString(DecryptStringReturnBytes(cipherText, passPhrase));
         }
     }
 }

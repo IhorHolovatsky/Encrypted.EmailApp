@@ -21,7 +21,7 @@ namespace Encrypted.EmailApp.Services
             return _messageRepository.GetMessagesAsync();
         }
 
-        public Task SendMessageAsync(EmailMessage message, string encryptionKey)
+        public Task<EmailMessage> SendMessageAsync(EmailMessage message, string encryptionKey)
         {
             //Encryption by DES then AES...
             //more encryption :)

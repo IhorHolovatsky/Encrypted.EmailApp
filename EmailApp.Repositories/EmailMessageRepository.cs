@@ -15,7 +15,8 @@ namespace EmailApp.Repositories
         {
             _messages.Add(new EmailMessage
             {
-                Message = "Test",
+                //key: P2fqaDlB
+                Message = "fRueFHcX7ysksXT7NNZbEZ4OJunTayqcu2TIuCPy4q4=",
                 Subject = "Test subj",
                 FromUsername = "Ihor",
                 MessageId = 1,
@@ -32,13 +33,13 @@ namespace EmailApp.Repositories
             return Task.FromResult(_messages);
         }
 
-        public Task SendMessageAsync(EmailMessage message)
+        public Task<EmailMessage> SendMessageAsync(EmailMessage message)
         {
             var random = new Random();
             message.MessageId = random.Next(0, int.MaxValue);
             _messages.Add(message);
 
-            return Task.FromResult(0);
+            return Task.FromResult(message);
         }
 
         public Task<EmailMessage> GetMessageByIdAsync(int messageId)

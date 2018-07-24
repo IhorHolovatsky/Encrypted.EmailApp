@@ -8,6 +8,6 @@ namespace EmailApp.Domain.Interfaces
         Task<List<EmailMessage>> GetMessagesAsync();
         Task<EmailMessage> GetMessageByIdAsync(int messageId);
 
-        Task SendMessageAsync(EmailMessage message);
+        Task<EmailMessage> SendMessageAsync(EmailMessage message);
     }
 }

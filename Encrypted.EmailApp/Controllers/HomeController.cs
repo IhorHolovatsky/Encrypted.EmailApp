@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Security.Cryptography;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.ModelBinding;
 using System.Web.Mvc;
 using EmailApp.Domain;
 using Encrypted.EmailApp.Models;
@@ -40,6 +36,7 @@ namespace Encrypted.EmailApp.Controllers
         }
 
         [HttpPost]
+        [Route("messages/send")]
         public async Task<ActionResult> SendMessage(EmailMessageViewModel model)
         {
             if (!ModelState.IsValid)
@@ -47,13 +44,13 @@ namespace Encrypted.EmailApp.Controllers
                 return View("SendMessageIndex", model);
             }
 
-            await _emailMessageService.SendMessageAsync(new EmailMessage
+            var savedMessage = await _emailMessageService.SendMessageAsync(new EmailMessage
             {
                 Message = model.Message,
                 Subject = model.Subject
             }, model.EncryptionKey);
 
-            return await ViewMessage(0);
+            return await ViewMessage(savedMessage.MessageId);
         }
 
 
@@ -66,6 +63,7 @@ namespace Encrypted.EmailApp.Controllers
             return View(model);
         }
 
+        [Route("messages/{messageId:int:min(0)}")]
         public async Task<ActionResult> ViewMessage(int? messageId)
         {
             if (!messageId.HasValue)
@@ -78,7 +76,8 @@ namespace Encrypted.EmailApp.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> ViewMessage(EmailMessageViewModel message)
+        [Route("messages/decrypt")]
+        public async Task<ActionResult> DecryptMessage(EmailMessageViewModel message)
         {
             if (!message.MessageId.HasValue)
                 return HttpNotFound();
@@ -88,9 +87,16 @@ namespace Encrypted.EmailApp.Controllers
 
             if (!string.IsNullOrEmpty(message.EncryptionKey))
             {
-                model.Message.Message = await _emailMessageService.DecryptMessageAsync(
-                    model.Message.Message,
-                    message.EncryptionKey);
+                try
+                {
+                    model.Message.Message = await _emailMessageService.DecryptMessageAsync(
+                        model.Message.Message,
+                        message.EncryptionKey);
+                }
+                catch (CryptographicException)
+                {
+                    ModelState.AddModelError($"{nameof(message)}.{nameof(message.EncryptionKey)}", "Invalid encryption key!");
+                }
             }
 
             return View("ViewMessage", model);

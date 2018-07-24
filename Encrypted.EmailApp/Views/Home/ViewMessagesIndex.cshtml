@@ -19,7 +19,7 @@
     <tbody>
     @foreach (var emailMessage in Model.Messages)
     {
-        <tr onclick="window.location = '@Url.Action("ViewMessage",new { messageId = emailMessage.MessageId})'">
+        <tr onclick="window.location = '@Url.Action("ViewMessage", "Home", new RouteValueDictionary{ { "messageId", emailMessage.MessageId}})'">
             <td>@emailMessage.FromUsername</td>
             <td>@emailMessage.Subject</td>
             <td>@emailMessage.Message.Truncate(100)</td>

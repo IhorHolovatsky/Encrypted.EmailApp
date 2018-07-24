@@ -10,7 +10,7 @@ namespace Encrypted.EmailApp.Services.Interfaces
 
         Task<EmailMessage> GetMessageByIdAsync(int messageId);
 
-        Task SendMessageAsync(EmailMessage message, string encryptionKey);
+        Task<EmailMessage> SendMessageAsync(EmailMessage message, string encryptionKey);
 
         Task<string> DecryptMessageAsync(string text, string decryptionKey);
     }

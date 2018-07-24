@@ -14,36 +14,34 @@ namespace Encrypted.EmailApp.Encryption
 
         public static string DecryptText(string input, string password)
         {
-            // Get the bytes of the string
-            var bytesToBeDecrypted = Encoding.UTF8.GetBytes(input);
-            var passwordBytes = Encoding.UTF8.GetBytes(password);
-
-            passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
-
-            var bytesDecrypted = DecryptBytes(bytesToBeDecrypted, passwordBytes);
-
+            var bytesDecrypted = DecryptTextReturnBytes(input, password);
             var result = Encoding.UTF8.GetString(bytesDecrypted);
 
             return result;
         }
 
-        public static string EncryptText(string input, string password)
+        public static byte[] DecryptTextReturnBytes(string input, string password)
         {
             // Get the bytes of the string
-            byte[] bytesToBeEncrypted = Encoding.UTF8.GetBytes(input);
-            byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+            var bytesToBeDecrypted = Convert.FromBase64String(input);
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
 
-            // Hash the password with SHA256
             passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
-
-            byte[] bytesEncrypted = EncryptBytes(bytesToBeEncrypted, passwordBytes);
-
-            string result = Convert.ToBase64String(bytesEncrypted);
-
-            return result;
+            
+            return DecryptBytes(bytesToBeDecrypted, passwordBytes);
         }
 
-        private static byte[] DecryptBytes(byte[] bytesToBeDecrypted, byte[] passwordBytes)
+        public static string DecryptBytes(byte[] bytesToBeDecrypted, string password)
+        {
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
+
+            passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
+
+            return Encoding.UTF8.GetString(DecryptBytes(bytesToBeDecrypted, passwordBytes));
+        }
+
+
+        public static byte[] DecryptBytes(byte[] bytesToBeDecrypted, byte[] passwordBytes)
         {
             byte[] decryptedBytes;
 
@@ -70,7 +68,30 @@ namespace Encrypted.EmailApp.Encryption
             return decryptedBytes;
         }
 
-        private static byte[] EncryptBytes(byte[] bytesToBeEncrypted, byte[] passwordBytes)
+
+
+        public static string EncryptText(string input, string password)
+        {
+            var bytesEncrypted = EncryptTextReturnBytes(input, password);
+
+            var result = Convert.ToBase64String(bytesEncrypted);
+
+            return result;
+        }
+
+        public static byte[] EncryptTextReturnBytes(string input, string password)
+        {
+            // Get the bytes of the string
+            var bytesToBeEncrypted = Encoding.UTF8.GetBytes(input);
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
+
+            // Hash the password with SHA256
+            passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
+            
+            return EncryptBytes(bytesToBeEncrypted, passwordBytes);
+        }
+
+        public static byte[] EncryptBytes(byte[] bytesToBeEncrypted, byte[] passwordBytes)
         {
             byte[] encryptedBytes;
 
